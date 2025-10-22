@@ -1,48 +1,37 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
-const products = [
-  {
-    name: "Wireless Headphones",
-    description: "Experience crystal clear sound with deep bass.",
-    image: "https://images.pexels.com/photos/792345/pexels-photo-792345.jpeg",
-  },
-  {
-    name: "Smart Watch",
-    description: "Track fitness, notifications, and health easily.",
-    image: "https://images.pexels.com/photos/3345882/pexels-photo-3345882.jpeg",
-  },
-  {
-    name: "Bluetooth Speaker",
-    description: "Portable and powerful for all your music needs.",
-    image: "https://images.pexels.com/photos/1623016/pexels-photo-1623016.jpeg",
-  },
-  {
-    name: "Gaming Mouse",
-    description: "Precision control for a next-level gaming experience.",
-    image: "https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg",
-  },
-  {
-    name: "4K Action Camera",
-    description: "Capture your adventures in ultra HD quality.",
-    image: "https://images.pexels.com/photos/196659/pexels-photo-196659.jpeg",
-  },
-];
-
 function ProductBox() {
+  const [apidata, setApidata] = useState([]);
+
+  const productdata = async () => {
+    try {
+      const res = await fetch("https://dummyjson.com/products");
+      const jsondata = await res.json();
+      setApidata(jsondata.products);
+    } catch (err) {
+      console.log("Error found:", err);
+    }
+  };
+
+  useEffect(() => {
+    productdata();
+  }, []);
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mt-10">
-      {products.map((product, index) => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mt-10 px-4">
+      {apidata.map((product) => (
         <div
-          key={index}
+          key={product.id}
           className="group bg-white p-4 rounded-xl shadow-md hover:shadow-2xl 
           hover:-translate-y-2 transition-all duration-300 ease-in-out cursor-pointer"
         >
-          {/* Image */}
+          {/* Product Image */}
           <div className="relative w-full h-40 overflow-hidden rounded-lg">
             <Image
-              src={product.image}
-              alt={product.name}
+              src={product.images[0]} // ✅ Use first image
+              alt={product.title}      // ✅ Use title
               fill
               className="object-cover rounded-lg group-hover:scale-110 transition-transform duration-500 ease-in-out"
             />
@@ -50,10 +39,14 @@ function ProductBox() {
 
           {/* Product Info */}
           <h3 className="mt-4 text-lg font-semibold text-gray-800 text-center group-hover:text-pink-500 transition-colors duration-300">
-            {product.name}
+            {product.title}
           </h3>
           <p className="text-gray-600 text-sm mt-2 text-center group-hover:text-gray-800">
-            {product.description}
+            {product.description.slice(0, 60)}...
+          </p>
+
+          <p className="text-center mt-2 text-pink-600 font-bold">
+            ${product.price}
           </p>
         </div>
       ))}
