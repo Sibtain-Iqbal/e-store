@@ -1,38 +1,30 @@
-"use client";
-import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
-function ProductBox() {
-  const [apidata, setApidata] = useState([]);
+async function getrecentlyaddeddata() {
+  const data = await fetch("https://dummyjson.com/products/?limit=10");
+  const res = await data.json();
+  return res.products;
+}
 
-  const productdata = async () => {
-    try {
-      const res = await fetch("https://dummyjson.com/products");
-      const jsondata = await res.json();
-      setApidata(jsondata.products);
-    } catch (err) {
-      console.log("Error found:", err);
-    }
-  };
-
-  useEffect(() => {
-    productdata();
-  }, []);
+async function ProductBox() {
+  const apidata = await getrecentlyaddeddata();
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mt-10 px-4">
       {apidata.map((product) => (
-        <div
+        <Link
           key={product.id}
+          href={`/products/${product.id}`} // ✅ Dynamic link
           className="group bg-white p-4 rounded-xl shadow-md hover:shadow-2xl 
-          hover:-translate-y-2 transition-all duration-300 ease-in-out cursor-pointer"
+          hover:-translate-y-2 transition-all duration-300 ease-in-out cursor-pointer block"
         >
           {/* Product Image */}
           <div className="relative w-full h-40 overflow-hidden rounded-lg">
             <Image
-              src={product.images[0]} // ✅ Use first image
-              alt={product.title}      // ✅ Use title
-              fill
+              src={product.images[0]} // ✅ First image
+              alt={product.title}
+              fill 
               className="object-cover rounded-lg group-hover:scale-110 transition-transform duration-500 ease-in-out"
             />
           </div>
@@ -48,7 +40,7 @@ function ProductBox() {
           <p className="text-center mt-2 text-pink-600 font-bold">
             ${product.price}
           </p>
-        </div>
+        </Link>
       ))}
     </div>
   );

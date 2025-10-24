@@ -36,7 +36,7 @@ function Slider() {
             src={src}
             alt={`Slide ${index + 1}`}
             fill
-            className="object-cover object-center"
+            className="object-cover object-center "
             priority={index === current}
           />
         </div>
