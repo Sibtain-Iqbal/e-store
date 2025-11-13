@@ -3,7 +3,7 @@ import "./globals.css";
 import Header from "@/Components/Header";
 import Footer from "@/Components/Footer";
 import Link from "next/link";
-
+import { CardContextProvider } from "@/ContextApi/cartcontext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,10 +26,12 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header/>
- 
+        <CardContextProvider>
+          <Header />
+
         {children}
-  <Footer/>
+        <Footer />
+        </CardContextProvider>
       </body>
     </html>
   );

@@ -13,10 +13,10 @@ export default function Footer() {
             Discover the latest electronics, fashion, and lifestyle products at unbeatable prices.
           </p>
           <div className="flex space-x-4 mt-5">
-            <Link href="#" className="hover:text-pink-500"><FaFacebookF /></Link>
-            <Link href="#" className="hover:text-pink-500"><FaInstagram /></Link>
-            <Link href="#" className="hover:text-pink-500"><FaTwitter /></Link>
-            <Link href="#" className="hover:text-pink-500"><FaGithub /></Link>
+            <Link href="/" className="hover:text-pink-500"><FaFacebookF /></Link>
+            <Link href="/" className="hover:text-pink-500"><FaInstagram /></Link>
+            <Link href="/" className="hover:text-pink-500"><FaTwitter /></Link>
+            <Link href="/" className="hover:text-pink-500"><FaGithub /></Link>
             <Link href="mailto:info@shopease.com" className="hover:text-pink-500"><FaEnvelope /></Link>
           </div>
         </div>
@@ -36,15 +36,15 @@ export default function Footer() {
         <div>
           <h3 className="text-lg font-semibold text-white mb-4">Customer Support</h3>
           <ul className="space-y-2 text-sm">
-            <li><Link href="/faq" className="hover:text-pink-400">FAQ</Link></li>
-            <li><Link href="/shipping" className="hover:text-pink-400">Shipping & Returns</Link></li>
-            <li><Link href="/privacy" className="hover:text-pink-400">Privacy Policy</Link></li>
-            <li><Link href="/terms" className="hover:text-pink-400">Terms & Conditions</Link></li>
+            <li><Link href="/" className="hover:text-pink-400">FAQ</Link></li>
+            <li><Link href="/" className="hover:text-pink-400">Shipping & Returns</Link></li>
+            <li><Link href="/" className="hover:text-pink-400">Privacy Policy</Link></li>
+            <li><Link href="/" className="hover:text-pink-400">Terms & Conditions</Link></li>
           </ul>
         </div>
 
         {/* Newsletter */}
-        <div>
+        <div> 
           <h3 className="text-lg font-semibold text-white mb-4">Stay Updated</h3>
           <p className="text-sm mb-3">
             Subscribe to our newsletter and get the latest offers & trends.
